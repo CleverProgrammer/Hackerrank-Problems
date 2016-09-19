@@ -4,7 +4,6 @@ Program: Minion Game (Hackerrank Challenge)
 Modified: September 13
 """
 from itertools import permutations
-from collections import namedtuple
 
 
 def count_occurrence(text='', pattern=''):
@@ -48,37 +47,47 @@ def all_length_perms(word):
     return perms
 
 
-def perms_with_consonant(word):
-    word_scores = set()
-    Consonant = namedtuple('Consonant', ['position', 'letter'])
-    word = word.lower()
-    consonants = [Consonant(index, letter) for index, letter in enumerate(word) if
-                  letter not in ('a', 'e', 'i', 'o', 'u')]
-    print(consonants)
-    for consonant in consonants:
-        print(consonant.position, consonant.letter)
-        if not consonant.position == len(word) - 1:
-            # Skip the letter
-            new_word = word[:consonant.position] + word[consonant.position + 1:]
-            perms = all_length_perms(new_word)
-            for perm in perms:
-                print(perm)
-                found = count_occurrence(word, perm)
-                print(found)
-                if found:
-                    word_scores.add((perm, found))
-            print(new_word)
-        else:
-            new_word = word[:-1]
-            print(new_word)
+def minion(word):
+    """
+    Create all permutations of the given word starting with its consonants.
+    Give 1 point for each permutation found as a substring in the given word.
+    Return score for player 1 and score for player 2. Player 1 is Stuart and
+    Player 2 is Kevin. Stuart has the consonants and Kevin the vowels
+    :param word: str
+    :return: tuple
 
-    print(word_scores)
-    return sum((score for word, score in word_scores))
+    >>> minion('banana')
+    'Stuart 12'
 
-print(perms_with_consonant('banana'))
+    >>> minion('aaa')
+    'Kevin 6'
+
+    >>> minion('ab')
+    'Kevin 2'
+    """
+    consonant = set('bcdfghjklmnpqrstvwxyz')
+    vowels = set('aeiou')
+    assert len(consonant.union(vowels)) == 26
+    perms = set(all_length_perms(word))
+
+    all_perms = set()
+
+    for perm in perms:
+        found = count_occurrence(word, perm)
+        if found and perm[0] in consonant:
+            all_perms.add((perm, found, 'consonant'))
+        elif found and perm[0] in vowels:
+            all_perms.add((perm, found, 'vowel'))
+
+    consonant_score = sum([score for _, score, type in all_perms if type == 'consonant'])
+    vowel_score = sum([score for _, score, type in all_perms if type == 'vowel'])
+
+    if consonant_score > vowel_score:
+        return 'Stuart {}'.format(consonant_score)
+    return 'Kevin {}'.format(vowel_score)
+
 
 if __name__ == '__main__':
     import doctest
 
     doctest.testmod()
-    print(all_length_perms('OBIAS'))
