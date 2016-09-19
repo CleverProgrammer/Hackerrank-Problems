@@ -65,6 +65,7 @@ def minion(word):
     >>> minion('ab')
     'Kevin 2'
     """
+    word = word.lower()
     consonant = set('bcdfghjklmnpqrstvwxyz')
     vowels = set('aeiou')
     assert len(consonant.union(vowels)) == 26
@@ -84,6 +85,10 @@ def minion(word):
 
     if consonant_score > vowel_score:
         return 'Stuart {}'.format(consonant_score)
+
+    elif consonant_score == vowel_score:
+        return 'Draw'
+
     return 'Kevin {}'.format(vowel_score)
 
 
