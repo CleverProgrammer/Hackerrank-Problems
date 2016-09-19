@@ -1,0 +1,20 @@
+
+expected_date = input().split()
+actual_date = input().split()
+
+
+def fee(expected_date, actual_date):
+    
+    if expected_date <= int(actual_date[0]) and expected_date <= int(actual_date[1]) and expected_date <= int(actual_date[2]:
+        return 0
+    
+    if expected_date == actual_date[1] and expected_date == actual_date[2]:
+        return 15 * late_days
+
+    if expected_date == actual_date[2] and expected_date > actual_date[1]:
+        return 500 * actual_month
+
+    if expected_date > actual_date[2]:
+        return 10000
+fee(expected_date, actual_date)
+
