@@ -13,7 +13,9 @@ def array_left_rotation(int_list, shift):
     :param int_list: list
     :param shift: int
 
-    Worst Case Complexity: O(2N)
+    Worst Case Time Complexity: O(2N)
+
+    Worse Case Space Complexity: O(N)
 
     >>> array_left_rotation([1, 2, 3, 4, 5], 1)
     2 3 4 5 1
@@ -33,7 +35,7 @@ def new_index_value_pairs(int_list, shift):
     :param shift: int
     :return: list
 
-    Worst Case Complexity: O(N)
+    Worst Case Time Complexity: O(N)
 
     >>> new_index_value_pairs([10, 20, 30], 1)
     [(2, 10), (0, 20), (1, 30)]
@@ -47,7 +49,7 @@ def replace_int_list(int_list, pairs):
     :param int_list: list
     :param pairs: list
 
-    Worst Case Complexity: O(N)
+    Worst Case Time Complexity: O(N)
 
     >>> int_list = [10, 20, 30]
     >>> replace_int_list(int_list, [(0, 20), (1, 30), (2, 10)])
@@ -62,6 +64,6 @@ if __name__ == '__main__':
     import doctest
 
     doctest.testmod()
-    n, d = map(int, input().strip().split())
-    a = list(map(int, input().strip().split()))
-    array_left_rotation(a, d)
+    _, shift = map(int, input().strip().split())
+    int_list = list(map(int, input().strip().split()))
+    array_left_rotation(int_list, shift)
