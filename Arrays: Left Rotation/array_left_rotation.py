@@ -6,6 +6,26 @@ Submit this code at: https://www.hackerrank.com/challenges/ctci-array-left-rotat
 """
 
 
+def array_left_rotation(int_list, shift):
+    """
+    Given an array of n integers and a number, d, perform d left rotations on the array.
+    Then print the updated array as a single line of space-separated integers.
+    :param int_list: list
+    :param shift: int
+
+    Worst Case Complexity: O(2N)
+
+    >>> array_left_rotation([1, 2, 3, 4, 5], 1)
+    2 3 4 5 1
+
+    >>> array_left_rotation([2, 3, 4, 5, 1], 3)
+    5 1 2 3 4
+    """
+    pairs = new_index_value_pairs(int_list, shift)
+    replace_int_list(int_list, pairs)
+    print(*int_list, sep=' ')
+
+
 def new_index_value_pairs(int_list, shift):
     """
     Create a list of shifted index and value tuples.
@@ -36,26 +56,6 @@ def replace_int_list(int_list, pairs):
     """
     for index, value in pairs:
         int_list[index] = value
-
-
-def array_left_rotation(int_list, shift):
-    """
-    Given an array of n integers and a number, d, perform d left rotations on the array.
-    Then print the updated array as a single line of space-separated integers.
-    :param int_list: list
-    :param shift: int
-
-    Worst Case Complexity: O(2N)
-
-    >>> array_left_rotation([1, 2, 3, 4, 5], 1)
-    2 3 4 5 1
-
-    >>> array_left_rotation([2, 3, 4, 5, 1], 3)
-    5 1 2 3 4
-    """
-    pairs = new_index_value_pairs(int_list, shift)
-    replace_int_list(int_list, pairs)
-    print(*int_list, sep=' ')
 
 
 if __name__ == '__main__':
